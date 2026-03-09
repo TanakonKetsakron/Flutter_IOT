@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import '../services/notification_service.dart';
 
 class GasProvider extends ChangeNotifier {
   final DatabaseReference _airDataRef =
@@ -49,6 +50,13 @@ class GasProvider extends ChangeNotifier {
       gasPPM = (map["gas"] ?? 0).toDouble();
       isConnected = true;
       isLoading = false;
+
+      // ตรวจค่าและแจ้งเตือนบนมือถือ
+      NotificationService.checkAndNotify(
+        gasPPM: gasPPM,
+        temperature: temperature,
+      );
+
       notifyListeners();
     }, onError: (_) {
       isConnected = false;

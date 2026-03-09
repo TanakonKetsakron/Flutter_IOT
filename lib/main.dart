@@ -5,10 +5,12 @@ import 'pages/dashboard.dart';
 import 'widgets/control.dart';
 import 'providers/gas_provider.dart';
 import 'firebase_options.dart';
+import 'services/notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await NotificationService.initialize();
   runApp(const AirApp());
 }
 
