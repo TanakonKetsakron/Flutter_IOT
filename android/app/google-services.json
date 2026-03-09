@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "971877145555",
+    "firebase_url": "https://iot-air-alert-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "iot-air-alert",
+    "storage_bucket": "iot-air-alert.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971877145555:android:50dc6bb52d942626f3ad26",
+        "android_client_info": {
+          "package_name": "com.example.air_quality_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp-19HZ5yP49vDF1ks7UFXUwwup_eSqVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
