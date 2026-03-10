@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService {
@@ -30,7 +32,8 @@ class NotificationService {
     final androidPlugin =
         _plugin.resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>();
-    await androidPlugin?.requestNotificationsPermission();
+    final granted = await androidPlugin?.requestNotificationsPermission();
+    debugPrint('🔔 Notification permission granted: $granted');
 
     _isInitialized = true;
   }
@@ -39,9 +42,13 @@ class NotificationService {
     required double gasPPM,
     required double temperature,
   }) async {
-    if (!_isInitialized) return;
+    if (!_isInitialized) {
+      debugPrint('🔔 NotificationService not initialized!');
+      return;
+    }
 
     final now = DateTime.now();
+    debugPrint('🔔 checkAndNotify: gas=$gasPPM, temp=$temperature');
 
     // ตรวจค่าแก๊ส
     if (gasPPM >= gasDangerPPM) {
@@ -108,8 +115,13 @@ class NotificationService {
       priority: priority,
       playSound: true,
       enableVibration: true,
+      vibrationPattern: Int64List.fromList([0, 500, 200, 500, 200, 500]),
+      enableLights: true,
+      fullScreenIntent: true,
       icon: '@mipmap/ic_launcher',
     );
+
+    debugPrint('🔔 Showing notification: $title');
 
     await _plugin.show(
       id,
